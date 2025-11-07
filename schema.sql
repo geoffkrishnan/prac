@@ -1,16 +1,16 @@
-CREATE TABLE problems (
+CREATE TABLE IF NOT EXISTS problems (
     id INTEGER PRIMARY KEY,
     url TEXT UNIQUE,
     name TEXT NOT NULL,
     problem_number INTEGER UNIQUE,
     is_archived BOOLEAN DEFAULT 0
 );
-CREATE TABLE tags (
+CREATE TABLE IF NOT EXISTS tags (
     id INTEGER PRIMARY KEY,
     name TEXT NOT NULL UNIQUE
 );
 
-CREATE TABLE problem_tags (
+CREATE TABLE IF NOT EXISTS problem_tags (
     problem_id INTEGER NOT NULL,
     tag_id INTEGER NOT NULL,
     PRIMARY KEY (problem_id, tag_id),
@@ -18,7 +18,7 @@ CREATE TABLE problem_tags (
     FOREIGN KEY(tag_id) REFERENCES tags(id)
 );
 
-CREATE TABLE reviews (
+CREATE TABLE IF NOT EXISTS reviews (
     id INTEGER PRIMARY KEY,
     problem_id INTEGER NOT NULL,
     quality INTEGER NOT NULL,
