@@ -1,7 +1,7 @@
 CREATE TABLE IF NOT EXISTS problems (
     id INTEGER PRIMARY KEY,
     url TEXT UNIQUE,
-    name TEXT NOT NULL,
+    name TEXT,
     problem_number INTEGER UNIQUE,
     is_archived BOOLEAN DEFAULT 0
 );

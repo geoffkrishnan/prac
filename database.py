@@ -1,21 +1,37 @@
 import sqlite3
 
 
-def init_db(db_path="info.db"):
-    con = sqlite3.connect("info.db")
-    cur = con.cursor()
+def connect_to_db(db_path="info.db"):
+    con = sqlite3.connect(db_path)
+    con.execute("PRAGMA foreign_keys = ON")
+    return con
 
-    cur.execute("PRAGMA foreign_keys = ON")
+
+def init_db(db_path="info.db"):
+    con = connect_to_db(db_path)
 
     with open("schema.sql", "r") as f:
         schema = f.read()
 
-    cur.executescript(schema)
+    con.executescript(schema)
+    con.commit()
+    con.close()
+
+
+def add_problem(url, name=None):
+    con = connect_to_db()
+    cur = con.cursor()
+
+    cur.execute("INSERT INTO problems (url, name) VALUES (?, ?)", (url, name))
 
     con.commit()
     con.close()
+    print(f"Added problem: {url}")
 
 
 if __name__ == "__main__":
     init_db()
     print("Database initialized")
+    add_problem("https://leetcode.com/problems/two-sum/", "Two Sum")
+    add_problem("https://leetcode.com/problems/three-sum/", "Three Sum")
+    add_problem("https://leetcode.com/problems/best-time-to-buy-and-sell-stock/")
