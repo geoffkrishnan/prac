@@ -33,7 +33,8 @@ def add_problem(url, name=None):
 def list_problems():
     con = connect_to_db()
     cur = con.cursor()
-    cur.execute("SELECT name FROM problems")
+    for row in cur.execute("SELECT name FROM problems"):
+        print(row)
     con.close()
 
 
