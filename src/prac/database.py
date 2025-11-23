@@ -11,7 +11,7 @@ def connect_to_db(db_path="info.db"):
 def init_db(db_path="info.db"):
     con = connect_to_db(db_path)
     schema_path = Path(__file__).parent / "schema.sql"
-    with (schema_path, "r") as f:
+    with open(schema_path, "r") as f:
         schema = f.read()
 
     con.executescript(schema)
