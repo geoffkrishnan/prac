@@ -29,9 +29,13 @@ def add_problem(url, name=None):
     print(f"Added problem: {url}")
 
 
+def list_problems():
+    con = connect_to_db()
+    cur = con.cursor()
+    cur.execute("SELECT name FROM problems")
+    con.close()
+
+
 if __name__ == "__main__":
     init_db()
     print("Database initialized")
-    add_problem("https://leetcode.com/problems/two-sum/", "Two Sum")
-    add_problem("https://leetcode.com/problems/three-sum/", "Three Sum")
-    add_problem("https://leetcode.com/problems/best-time-to-buy-and-sell-stock/")
