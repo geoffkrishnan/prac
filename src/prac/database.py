@@ -1,4 +1,5 @@
 import sqlite3
+from pathlib import Path
 
 
 def connect_to_db(db_path="info.db"):
@@ -9,8 +10,8 @@ def connect_to_db(db_path="info.db"):
 
 def init_db(db_path="info.db"):
     con = connect_to_db(db_path)
-
-    with open("schema.sql", "r") as f:
+    schema_path = Path(__file__).parent / "schema.sql"
+    with (schema_path, "r") as f:
         schema = f.read()
 
     con.executescript(schema)
