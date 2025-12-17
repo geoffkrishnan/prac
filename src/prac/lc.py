@@ -16,9 +16,9 @@ def cli():
 
 @cli.command()
 @click.argument("url")
+@click.argument("problem_number")
 @click.argument("name", required=False, default=None)
-@click.argument("problem_number", required=False, default=None)
-def add(url, name, problem_number):
+def add(url, problem_number, name):
     add_problem(url, name, problem_number)
 
 
