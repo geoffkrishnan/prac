@@ -4,6 +4,10 @@ CREATE TABLE IF NOT EXISTS problems (
     name TEXT,
     problem_number INTEGER UNIQUE,
     is_archived BOOLEAN DEFAULT 0
+    next_review_date TEXT,
+    easiness REAL DEFAULT 2.5,
+    interval INTEGER DEFAULT 0,
+    reps INTEGER DEFAULT 0
 );
 CREATE TABLE IF NOT EXISTS tags (
     id INTEGER PRIMARY KEY,
