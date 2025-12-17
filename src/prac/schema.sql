@@ -3,8 +3,8 @@ CREATE TABLE IF NOT EXISTS problems (
     url TEXT,
     name TEXT,
     problem_number INTEGER UNIQUE,
-    is_archived BOOLEAN DEFAULT 0
-    next_review_date TEXT,
+    is_archived BOOLEAN DEFAULT 0,
+    next_review_date TEXT DEFAULT CURRENT_DATE,
     easiness REAL DEFAULT 2.5,
     interval INTEGER DEFAULT 0,
     reps INTEGER DEFAULT 0

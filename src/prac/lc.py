@@ -1,7 +1,12 @@
 import click
 
-from .database import init_db, add_problem, list_problems
-from supermemo2 import sm_two, first_review, review, timedelta, datetime
+from .database import (
+    init_db,
+    add_problem,
+    list_problems,
+    review_problems,
+    complete_problem,
+)
 
 
 @click.group()
@@ -11,10 +16,24 @@ def cli():
 
 @cli.command()
 @click.argument("url")
-def add(url):
-    add_problem(url)
+@click.argument("name", required=False, default=None)
+@click.argument("problem_number", required=False, default=None)
+def add(url, name, problem_number):
+    add_problem(url, name, problem_number)
 
 
 @cli.command()
 def list():
     list_problems()
+
+
+@cli.command()
+def review():
+    review_problems()
+
+
+@cli.command()
+@click.argument("problem_number", type=int)
+@click.argument("quality", type=int)
+def complete(problem_number, quality):
+    complete_problem(problem_number, quality)
