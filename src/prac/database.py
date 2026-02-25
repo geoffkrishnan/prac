@@ -27,10 +27,16 @@ def add_problem(url, name=None, problem_number=None):
     con = connect_to_db()
     cur = con.cursor()
 
-    cur.execute(
-        "INSERT INTO problems (url, name, problem_number) VALUES (?, ?, ?)",
-        (url, name, problem_number),
-    )
+    try:
+        cur.execute(
+            "INSERT INTO problems (url, name, problem_number) VALUES (?, ?, ?)",
+            (url, name, problem_number),
+        )
+    except sqlite3.IntegrityError:
+        print("Duplicate problem")
+        con.commit()
+        con.close()
+        return
 
     con.commit()
     con.close()
