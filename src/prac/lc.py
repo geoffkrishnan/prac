@@ -6,6 +6,7 @@ from .database import (
     list_problems,
     review_problems,
     complete_problem,
+    bulk_add_problems,
 )
 
 
@@ -37,3 +38,9 @@ def review():
 @click.argument("quality", type=int)
 def complete(problem_number, quality):
     complete_problem(problem_number, quality)
+
+
+@cli.command()
+@click.argument("filepath")
+def bulk_add(filepath):
+    bulk_add_problems(filepath)

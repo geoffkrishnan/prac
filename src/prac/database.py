@@ -1,4 +1,5 @@
 import sqlite3
+import csv
 from pathlib import Path
 from datetime import date
 from supermemo2 import review
@@ -119,6 +120,25 @@ def complete_problem(problem_number, quality):
     con.commit()
     con.close()
     print(f"Completed problem {problem_number}, Next review: {next_date}")
+
+
+def bulk_add_problems(filepath):
+    con = connect_to_db()
+    cur = con.cursor()
+
+    with open(filepath, "r") as f:
+        reader = csv.DictReader(f)
+        for row in reader:
+            try:
+                cur.execute(
+                    "INSERT INTO problems (url, name, problem_number) VALUES (?, ?, ?)",
+                    (row["url"], row.get("name"), int(row["problem_number"])),
+                )
+                print(f"Added: {row['problem_number']} - {row.get('name')}")
+            except sqlite3.IntegrityError:
+                print(
+                    f"Duplicate, can't add: {row['problem_number']} - {row.get('name')}"
+                )
 
 
 if __name__ == "__main__":
