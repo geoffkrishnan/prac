@@ -100,7 +100,14 @@ def complete_problem(problem_number, quality):
 
     cur.execute(
         "INSERT INTO reviews(problem_id, quality, easiness, interval, reps, review_datetime) VALUES (?, ?, ?, ?, ?, ?)",
-        (problem_id, quality, new_easiness, new_interval, new_reps, next_date),
+        (
+            problem_id,
+            quality,
+            new_easiness,
+            new_interval,
+            new_reps,
+            date.today().isoformat(),
+        ),
     )
 
     con.commit()
