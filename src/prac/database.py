@@ -139,6 +139,8 @@ def bulk_add_problems(filepath):
                 print(
                     f"Duplicate, can't add: {row['problem_number']} - {row.get('name')}"
                 )
+    con.commit()
+    con.close()
 
 
 if __name__ == "__main__":
