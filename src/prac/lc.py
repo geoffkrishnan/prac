@@ -19,7 +19,7 @@ def cli():
 @click.argument("url")
 @click.argument("problem_number", type=int)
 @click.argument("name", required=False, default=None)
-def add(url, problem_number, name):
+def add(url, name, problem_number):
     add_problem(url, name, problem_number)
 
 
