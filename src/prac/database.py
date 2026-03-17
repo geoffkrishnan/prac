@@ -91,6 +91,7 @@ def complete_problem(problem_number, quality):
     row = cur.fetchone()
     if not row:
         print(f"Problem {problem_number} not found")
+        con.close()
         return
 
     problem_id, easiness, interval, reps = row
