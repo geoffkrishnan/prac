@@ -81,6 +81,10 @@ def review_problems():
 
 
 def complete_problem(problem_number, quality):
+    if quality not in range(0, 6):
+        print("Invalid quality score, must be in range (0, 5)")
+        return
+
     con = connect_to_db()
     cur = con.cursor()
 
